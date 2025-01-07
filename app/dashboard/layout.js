@@ -1,7 +1,29 @@
-import React from "react";
+"use client";
 
-const DashboardLayout = () => {
-  return <div>DashboardLayout</div>;
+import React from "react";
+import { useEffect } from "react";
+import Header from "./_component/Header";
+// import Model from "./_component/Model";
+import dynamic from "next/dynamic";
+
+const DashboardLayout = ({ children }) => {
+  useEffect(() => {
+    const script = document.createElement("script");
+    script.type = "module";
+    script.src =
+      "https://cdn.jsdelivr.net/npm/@google/model-viewer@4.0.0/dist/model-viewer.min.js";
+    document.head.appendChild(script);
+  }, []);
+
+  return (
+    <div>
+      <Header></Header>
+      {children}
+      <div style={{ textAlign: "center", marginTop: "50px" }}>
+        {/* <Model></Model> */}
+      </div>
+    </div>
+  );
 };
 
 export default DashboardLayout;
