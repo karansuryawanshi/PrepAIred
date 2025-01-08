@@ -18,10 +18,10 @@ const DashboardLayout = ({ children }) => {
   return (
     <div>
       <Header></Header>
-      {children}
-      <div style={{ textAlign: "center", marginTop: "50px" }}>
-        {/* <Model></Model> */}
-      </div>
+      <div className="mx-5 md:mx-20 lg:mx-36">{children}</div>
+      {/* <div style={{ textAlign: "center", marginTop: "50px" }}>
+        <Model></Model>
+      </div> */}
     </div>
   );
 };
