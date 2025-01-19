@@ -14,10 +14,19 @@ import { Textarea } from "@/components/ui/textarea";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import { chatSession } from "@/utils/GeminiAiModel";
+import { db } from "@/utils/db";
+import { MockInterview } from "@/utils/schema";
+import { v4 as uuidv4 } from "uuid";
 
-// import loading
+import { useUser } from "@clerk/nextjs";
+import moment from "moment/moment";
+
+import { useRouter } from "next/navigation";
+
+import SpotlightCard from "@/src/blocks/TailwindComponents/SpotlightCard/SpotlightCard";
 
 const AddNewInterview = () => {
+  // console.log("use user", user?.primaryEmailAddress?.emailAddress);
   const [openDialog, setOpenDialog] = useState(false);
   const [role, setRole] = useState("");
   const [description, setDescription] = useState("");
@@ -25,6 +34,11 @@ const AddNewInterview = () => {
   const [loading, setLoading] = useState(false);
   const [jsonResponse, setJsonResponse] = useState([]);
 
+  const { user } = useUser();
+
+  const router = useRouter();
+
+  // console.log("user is ", user?.primaryEmailAddress?.emailAddress);
   const onSubmit = async (e) => {
     setLoading(true);
     e.preventDefault();
@@ -48,7 +62,27 @@ const AddNewInterview = () => {
 
     console.log(JSON.parse(mockresponse));
     setJsonResponse(mockresponse);
+    console.log("object");
     setLoading(false);
+
+    const resp = await db
+      .insert(MockInterview)
+      .values({
+        mockId: uuidv4(),
+        jsonMockResp: mockresponse,
+        jobPosition: role,
+        jobDesc: description,
+        jobExperince: experince,
+        createdBy: user?.primaryEmailAddress?.emailAddress,
+        createdAt: moment().format("DD-MM-YYYY"),
+      })
+      .returning({ mockId: MockInterview.mockId });
+
+    console.log("Successfully inserted:", resp);
+    if (resp) {
+      setOpenDialog(false);
+      router.push("/dashboard/interview/" + resp[0]?.mockId);
+    }
   };
   return (
     <div className="w-80">
@@ -58,15 +92,17 @@ const AddNewInterview = () => {
       >
         <h2 className="text-lg text-center">+ Add New</h2>
       </div>
+
       <Dialog open={openDialog}>
         <DialogContent className="max-w-2xl">
           <DialogHeader>
+            {/* <SpotlightCard className="z-10"> */}
             <DialogTitle className="text-2xl">
               Tell us more about Interviewing
             </DialogTitle>
             <DialogDescription asChild>
               <form action="" onSubmit={onSubmit}>
-                <div>
+                <div className="z-20">
                   <p>
                     Add details about your job position/role, job description,
                     and years of experience.
@@ -119,6 +155,7 @@ const AddNewInterview = () => {
                 </div>
               </form>
             </DialogDescription>
+            {/* </SpotlightCard> */}
           </DialogHeader>
         </DialogContent>
       </Dialog>
