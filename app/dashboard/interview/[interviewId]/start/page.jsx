@@ -4,6 +4,7 @@ import { db } from "@/utils/db";
 import { MockInterview } from "@/utils/schema";
 import { eq } from "drizzle-orm";
 import QuestionSection from "./_components/QuestionSection";
+import RecordAnsSection from "./_components/RecordAnsSection";
 
 const page = ({ params }) => {
   const [interviewData, setInterviewData] = useState();
@@ -30,12 +31,18 @@ const page = ({ params }) => {
   };
 
   return (
-    <div>
-      <div className="grid grid-cols-1 md:grid-cols-2">
-        <QuestionSection
+    <div className="flex">
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-10">
+        {mockInterviewQuestions.length > 0 && (
+          <QuestionSection
+            mockInterviewQuestions={mockInterviewQuestions}
+            activeIndexQuestion={activeIndexQuestion}
+          ></QuestionSection>
+        )}
+        <RecordAnsSection
           mockInterviewQuestions={mockInterviewQuestions}
           activeIndexQuestion={activeIndexQuestion}
-        ></QuestionSection>
+        ></RecordAnsSection>
       </div>
     </div>
   );

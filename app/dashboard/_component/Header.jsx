@@ -19,7 +19,6 @@ const Header = () => {
   };
 
   const pathname = usePathname();
-  console.log(pathname);
 
   return (
     <div className="flex p-4 items-center bg-secondary shadow-md justify-between ">
