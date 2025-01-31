@@ -4,12 +4,25 @@ import { WebcamIcon } from "lucide-react";
 import Webcam from "react-webcam";
 import { Button } from "@/components/ui/button";
 import useSpeechToText from "react-hook-speech-to-text";
+import { db } from "@/utils/db";
 import { Mic } from "lucide-react";
 import { toast } from "sonner";
 import { chatSession } from "@/utils/GeminiAiModel";
+import { UserAnswer } from "@/utils/schema";
+import moment from "moment";
+import { useUser } from "@clerk/nextjs";
 
-const RecordAnsSection = ({ mockInterviewQuestions, activeIndexQuestion }) => {
+const RecordAnsSection = ({
+  mockInterviewQuestions,
+  activeIndexQuestion,
+  interviewData,
+}) => {
   const [userAnswer, setUserAnswer] = useState("");
+  const [loading, setLoading] = useState("false");
+  const { user } = useUser();
+
+  const mailId = user?.emailAddresses[0]?.emailAddress;
+  console.log("user", mailId);
 
   const {
     error,
@@ -18,6 +31,7 @@ const RecordAnsSection = ({ mockInterviewQuestions, activeIndexQuestion }) => {
     results,
     startSpeechToText,
     stopSpeechToText,
+    setResults,
   } = useSpeechToText({
     continuous: true,
     useLegacyResults: false,
@@ -29,34 +43,67 @@ const RecordAnsSection = ({ mockInterviewQuestions, activeIndexQuestion }) => {
     });
   }, [results]);
 
-  const saveAnswer = async () => {
+  useEffect(() => {
+    if (!isRecording && userAnswer?.length > 10) {
+      UpdateUserAnswerinDB();
+    }
+    // if (userAnswer?.length < 10) {
+    //   setLoading(false);
+    //   setUserAnswer("");
+    //   toast("Error while saving your answer");
+    //   return;
+    // }
+  });
+
+  const startStopRecording = async () => {
     if (isRecording) {
+      setLoading(true);
       stopSpeechToText();
-      if (userAnswer?.length < 10) {
-        toast("Error while saving your answer");
-        return;
-      }
-      const feedbackAnswer =
-        "question" +
-        mockInterviewQuestions[activeIndexQuestion].question +
-        ",user Answer: " +
-        userAnswer +
-        "Depend on question and user Answer for give interview question" +
-        "please give us rating for answer and feedback as area of improvement if any" +
-        "in just 3 to 5 lines to improve it in json format with rating field and feedback field. ";
 
-      const result = await chatSession.sendMessage(feedbackAnswer);
-      const mockJsonResponse = result.response
-        .text()
-        .replace("```json", " ")
-        .replace("```", " ");
-
-      console.log(mockJsonResponse);
-
-      const mockJsonResponseParsed = JSON.parse(mockJsonResponse);
+      setLoading(false);
     } else {
       startSpeechToText();
     }
+  };
+
+  const UpdateUserAnswerinDB = async () => {
+    setLoading(true);
+    const feedbackAnswer =
+      "question" +
+      mockInterviewQuestions[activeIndexQuestion].question +
+      ",user Answer: " +
+      userAnswer +
+      "Depend on question and user Answer for give interview question" +
+      "please give us rating for answer and feedback as area of improvement if any" +
+      "in just 3 to 5 lines to improve it in json format with rating field and feedback field. ";
+
+    const result = await chatSession.sendMessage(feedbackAnswer);
+    const mockJsonResponse = result.response
+      .text()
+      .replace("```json", " ")
+      .replace("```", " ");
+
+    console.log(mockJsonResponse);
+
+    const mockJsonResponseParsed = JSON.parse(mockJsonResponse);
+
+    const response = await db.insert(UserAnswer).values({
+      mockId: interviewData?.mockId,
+      question: mockInterviewQuestions[activeIndexQuestion].question,
+      correctAnswer: mockInterviewQuestions[activeIndexQuestion].answer,
+      userAnswer: userAnswer,
+      feedback: mockJsonResponseParsed?.feedback,
+      rating: mockJsonResponseParsed?.rating,
+      userEmail: user?.emailAddresses[0]?.emailAddress,
+      createdAt: moment().format("DD-MM-YYYY HH:mm:ss"),
+    });
+    if (response) {
+      toast.success("Answer saved successfully");
+      setResults([]);
+    }
+    // setResults([]);
+    setUserAnswer("");
+    setLoading(false);
   };
 
   return (
@@ -73,7 +120,7 @@ const RecordAnsSection = ({ mockInterviewQuestions, activeIndexQuestion }) => {
           }}
         />
       </div>
-      <Button className="my-10" onClick={saveAnswer}>
+      <Button className="my-10" onClick={startStopRecording}>
         {isRecording ? (
           <h2 className="flex items-center gap-2">
             <Mic />
@@ -83,13 +130,13 @@ const RecordAnsSection = ({ mockInterviewQuestions, activeIndexQuestion }) => {
           "Start Recording"
         )}
       </Button>
-      <Button
+      {/* <Button
         onClick={() => {
           console.log(userAnswer);
         }}
       >
         Show answer
-      </Button>
+      </Button> */}
     </div>
   );
 };
