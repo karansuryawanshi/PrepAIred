@@ -33,6 +33,7 @@ const AddNewInterview = () => {
   const [experince, setExperince] = useState("");
   const [loading, setLoading] = useState(false);
   const [jsonResponse, setJsonResponse] = useState([]);
+  const [resume, setResume] = useState([]);
 
   const { user } = useUser();
 
@@ -50,8 +51,10 @@ const AddNewInterview = () => {
       ", job description: " +
       description +
       ", years of experience: " +
+      resume +
+      "Resume" +
       experince +
-      "Depend on job position and years of experience, give me a 5 interview question along with answer in JSON format Give us question and answer field.";
+      "Depend on job position and years of experience and resume, give me a 5 interview question along with answer in JSON format Give us question and answer field.";
 
     const result = await chatSession.sendMessage(InputPrompt);
 
@@ -73,6 +76,7 @@ const AddNewInterview = () => {
         jobPosition: role,
         jobDesc: description,
         jobExperince: experince,
+        resume: resume,
         createdBy: user?.primaryEmailAddress?.emailAddress,
         createdAt: moment().format("DD-MM-YYYY"),
       })
@@ -126,6 +130,16 @@ const AddNewInterview = () => {
                       placeholder="React.js, Angular, Nodejs etc."
                       onChange={(e) => {
                         setDescription(e.target.value);
+                      }}
+                    />
+                  </div>
+                  <div className="my-3">
+                    <label htmlFor="resume">Resume/cover letter</label>
+                    <Textarea
+                      id="resume"
+                      placeholder="Copy and Paste your Resume"
+                      onChange={(e) => {
+                        setResume(e.target.value);
                       }}
                     />
                   </div>

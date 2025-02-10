@@ -11,6 +11,7 @@ import { chatSession } from "@/utils/GeminiAiModel";
 import { UserAnswer } from "@/utils/schema";
 import moment from "moment";
 import { useUser } from "@clerk/nextjs";
+import webcam from "../../../../../../public/assets/webcam.svg";
 
 const RecordAnsSection = ({
   mockInterviewQuestions,
@@ -22,7 +23,7 @@ const RecordAnsSection = ({
   const { user } = useUser();
 
   const mailId = user?.emailAddresses[0]?.emailAddress;
-  console.log("user", mailId);
+  // console.log("user", mailId);
 
   const {
     error,
@@ -54,6 +55,17 @@ const RecordAnsSection = ({
     //   return;
     // }
   });
+
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      if (!isRecording) {
+        startStopRecording();
+        console.log("recording started");
+      }
+    }, 10000); // 10 seconds delay
+
+    return () => clearTimeout(timer); // Cleanup on unmount
+  }, [activeIndexQuestion]);
 
   const startStopRecording = async () => {
     if (isRecording) {
@@ -108,8 +120,8 @@ const RecordAnsSection = ({
 
   return (
     <div className="flex items-center justify-center flex-col">
-      <div className="flex flex-col mt-20 items-center bg-secondary rounded-lg p-5">
-        <WebcamIcon width={200} height={200} className="absolute" />
+      <div className="flex flex-col items-center rounded-lg p-5">
+        <WebcamIcon width={200} height={200} className="absolute " />
         <Webcam
           mirrored={true}
           style={{
@@ -120,7 +132,7 @@ const RecordAnsSection = ({
           }}
         />
       </div>
-      <Button className="my-10" onClick={startStopRecording}>
+      <Button className="mt-10" onClick={startStopRecording}>
         {isRecording ? (
           <h2 className="flex items-center gap-2">
             <Mic />

@@ -46,8 +46,8 @@ const page = ({ params }) => {
           activeIndexQuestion={activeIndexQuestion}
           interviewData={interviewData}
         ></RecordAnsSection>
-        <div className="flex justify-center gap-6">
-          {activeIndexQuestion > 0 && <Button>Previous Question</Button>}
+        <div className="flex justify-center gap-6 my-4">
+          {/* {activeIndexQuestion > 0 && <Button>Previous Question</Button>} */}
           {activeIndexQuestion != mockInterviewQuestions?.length - 1 && (
             <Button
               onClick={() => {

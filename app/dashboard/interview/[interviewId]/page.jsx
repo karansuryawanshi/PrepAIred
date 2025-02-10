@@ -12,8 +12,8 @@ import Link from "next/link";
 
 const page = () => {
   const [interviewData, setInterviewData] = useState();
-
   const [webCamEnable, setWebCamEnable] = useState(false);
+  const [permissionGranted, setPermissionGranted] = useState(false);
   const params = useParams();
 
   const getInterview = async () => {
@@ -25,9 +25,19 @@ const page = () => {
   };
 
   useEffect(() => {
-    console.log(params?.interviewId);
     getInterview();
-  });
+  }, []);
+
+  const checkPermissions = async () => {
+    try {
+      await navigator.mediaDevices.getUserMedia({ video: true, audio: true });
+      setPermissionGranted(true);
+      setWebCamEnable(true);
+    } catch (error) {
+      setPermissionGranted(false);
+      setWebCamEnable(false);
+    }
+  };
 
   return (
     <div className="my-10">
@@ -43,7 +53,7 @@ const page = () => {
             </h2>
             <h2>
               <strong>
-                Years of Experince :- {interviewData?.jobExperince}
+                Years of Experience :- {interviewData?.jobExperince}
               </strong>
             </h2>
           </div>
@@ -53,11 +63,12 @@ const page = () => {
               <strong>Information</strong>
             </h2>
             <h2 className="mt-3 text-yellow-500">
-              Enable Video Web Cam and Microphone to Start your Al Generated
-              Mock Interview, It Has 5 question which you can answer and at the
-              last you will get the report on the basis of your answer. NOTE: We
-              never record your video, Web cam access you can disable at any
-              time if you want
+              Enable Video Web Cam and Microphone to start your AI-generated
+              Mock Interview. It has 5 questions which you can answer, and at
+              the end, you will get a report based on your answers.
+              <br />
+              <strong>NOTE:</strong> We never record your video. Webcam access
+              can be disabled anytime.
             </h2>
           </div>
         </div>
@@ -72,8 +83,8 @@ const page = () => {
           ) : (
             <>
               <WebcamIcon className="w-full my-7 h-72 p-20 bg-secondary rounded-lg border" />
-              <Button className="w-full" onClick={() => setWebCamEnable(true)}>
-                Enable webcam and microphone
+              <Button className="w-full" onClick={checkPermissions}>
+                Enable Webcam and Microphone
               </Button>
             </>
           )}
@@ -81,7 +92,7 @@ const page = () => {
       </div>
       <div className="flex justify-end items-end">
         <Link href={"/dashboard/interview/" + params?.interviewId + "/start"}>
-          <Button className="" variant="primary">
+          <Button disabled={!permissionGranted} className="" variant="primary">
             Start Interview
           </Button>
         </Link>
