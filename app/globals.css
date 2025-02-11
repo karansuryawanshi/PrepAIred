@@ -7,6 +7,10 @@ body {
   font-family: "Nunito", sans-serif;
 }
 
+.hover-effect-class {
+  transition: transform 0.3s ease-in-out;
+}
+
 @layer base {
   :root {
     --background: 0 0% 100%;

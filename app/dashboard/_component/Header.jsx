@@ -1,6 +1,7 @@
 "use client";
 import React from "react";
 import Image from "next/image";
+import Logo from "@/public/assets/Logo.png";
 import { UserButton } from "@clerk/nextjs";
 import { usePathname } from "next/navigation";
 import Switch from "@mui/material/Switch";
@@ -21,14 +22,19 @@ const Header = () => {
   const pathname = usePathname();
 
   return (
-    <div className="flex p-4 items-center bg-secondary shadow-md justify-between ">
-      <Image
-        src={"/dummyLogo.svg"}
-        width={100}
-        height={10}
-        alt="logo"
-        className="dark:invert"
-      />
+    <div className="flex px-4  items-center bg-secondary shadow-md justify-between ">
+      <span className="flex items-center">
+        <Image
+          src={"/assets/Logo.png"}
+          width={100}
+          height={10}
+          alt="logo"
+          className="dark:invert"
+        />
+        <p className="text-2xl font-bold">
+          Prep<span className="text-red-600">AI</span>red
+        </p>
+      </span>
       <ul className="hidden md:flex gap-6">
         <li
           className={`transition-all duration-300 hover:text-black text-gray-700 hover:scale-105 cursor-pointer ${
