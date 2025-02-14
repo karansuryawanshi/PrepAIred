@@ -1,3 +1,4 @@
+"use client";
 import { index } from "drizzle-orm/mysql-core";
 import { Volume2 } from "lucide-react";
 import React, { useEffect } from "react";
