@@ -19,9 +19,9 @@ import { useRouter } from "next/navigation";
 import dynamic from "next/dynamic";
 // import("@google/model-viewer");
 
-const ModelViewer = dynamic(() => import("@google/model-viewer"), {
-  ssr: false,
-});
+// const ModelViewer = dynamic(() => import("@google/model-viewer"), {
+//   ssr: false,
+// });
 
 // import "@google/model-viewer";
 
@@ -31,6 +31,10 @@ const ModelViewer = dynamic(() => import("@google/model-viewer"), {
 
 const isBrowser = typeof window !== undefined;
 export default function Home() {
+  useEffect(() => {
+    import("@google/model-viewer");
+  }, []);
+
   // console.log(self);
 
   // useEffect(() => {
@@ -129,7 +133,7 @@ export default function Home() {
                   </p>
                 </div>
                 <div className="w-auto mx-4 flex items-center justify-center ">
-                  <ModelViewer
+                  <model-viewer
                     className=" rounded-xl"
                     src="/robot_playground.glb"
                     animation-name="Wave"
