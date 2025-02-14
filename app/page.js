@@ -35,6 +35,11 @@ export default function Home() {
     import("@google/model-viewer");
   }, []);
 
+  const navigate = useRouter();
+
+  const redirect = () => {
+    navigate.push("/dashboard");
+  };
   // console.log(self);
 
   // useEffect(() => {
@@ -87,11 +92,7 @@ export default function Home() {
                 </div>
                 <div className="absolute inset-0 border-2 border-stone-700 bg-gray-300/20 rounded-lg backdrop-blur-lg"></div>
                 <div className="z-50 inset-10 py-4 cursor-pointer">
-                  <Button
-                  // onClick={redirect}
-                  >
-                    Get Started
-                  </Button>
+                  <Button onClick={redirect}>Get Started</Button>
                 </div>
               </div>
               <div className="relative bottom-0 left-0 w-full h-1/2 bg-cover bg-center opacity-20"></div>
