@@ -1,7 +1,6 @@
 "use client";
-import mainImage from "@/public/assets/Logo.png";
+import mainImage from "@/public/assets/mainImage.png";
 import Image from "next/image";
-import img from "@/public/assets/bgImage.jpeg";
 import { Button } from "@/components/ui/button";
 import { HoverEffect } from "@/src/components/ui/card-hover-effect";
 import BlurText from "@/src/blocks/TextAnimations/BlurText/BlurText";
@@ -15,14 +14,31 @@ import generateImage from "@/public/magic.png";
 import { AudioLines } from "lucide-react";
 import { ThumbsUp } from "lucide-react";
 import TestimonialCard from "@/components/TestimonialCard";
-// import aiModel from "@/public/assets/robot_playground.gbl";
+import { useRouter } from "next/navigation";
+
 import "@google/model-viewer";
 
 export default function Home() {
+  const navigate = useRouter();
+
+  const redirect = () => {
+    navigate.push("/dashboard");
+    console.log("callsed");
+  };
   return (
     <div className=" bg-blue-50">
-      <div className="">
-        <header className="h-14 bg-secondary">Hello!</header>
+      <div className="bg-black">
+        <header className="h-14 sticky top-2 z-50 flex items-center justify-center">
+          <div className="text-white max-w-96 h-full pt-4 border-2 backdrop-blur-2xl bg-neutral-600/30 rounded-full">
+            <ul className="flex gap-10 px-4 text-sm xs:text-md">
+              <li>Home</li>
+              <li>Question</li>
+              <li>About</li>
+              <li>Contact us</li>
+            </ul>
+          </div>
+        </header>
+
         <main className="overflow-hidden ">
           <div className="relative w-full h-screen bg-[url('/assets/bannerBg.avif')] bg-cover bg-center">
             <video
@@ -50,11 +66,11 @@ export default function Home() {
                   />
                 </div>
                 <div className="absolute inset-0 border-2 border-stone-700 bg-gray-300/20 rounded-lg backdrop-blur-lg"></div>
-                <div className="z-10 py-4">
-                  <Button>Get Started</Button>
+                <div className="z-50 inset-10 py-4 cursor-pointer">
+                  <Button onClick={redirect}>Get Started</Button>
                 </div>
               </div>
-              <div className="absolute bottom-0 left-0 w-full h-1/2 bg-[url('/assets/faintBg.avif')] bg-cover bg-center opacity-20"></div>
+              <div className="relative bottom-0 left-0 w-full h-1/2 bg-[url('/assets/faintBg.avif')] bg-cover bg-center opacity-20"></div>
             </div>
             {/* <div className="relative w-full h-screen bg-[url('/assets/bannerBg.avif')] bg-cover bg-center rotate-180 mt-10"></div> */}
           </div>
@@ -73,7 +89,7 @@ export default function Home() {
               <h1 className="text-xl text-gray-400 mb-8">How it works</h1>
               <section className="w-full flex lg:flex-row flex-col">
                 <div className="lg:w-1/2 w-auto">
-                  <p className="text-gray-300 font-light h-auto bg-slate-200/30 backdrop-blur-2xl rounded-lg p-5">
+                  <p className="text-gray-300 font-light h-auto bg-neutral-600/40 backdrop-blur-2xl rounded-lg border border-neutral-600 p-5">
                     Our AI mock interviews are powered by gemini flash 1.5, your
                     job title, years of Experince, resume, and a job
                     description. When combined, we create a personalized
@@ -82,13 +98,13 @@ export default function Home() {
                     interview questions and answers that you can view.
                   </p>
 
-                  <p className="text-gray-300 font-light h-auto mt-10 bg-slate-200/30 backdrop-blur-2xl rounded-lg p-5">
+                  <p className="text-gray-300 font-light h-auto mt-10 bg-neutral-600/40 backdrop-blur-2xl rounded-lg p-5 border border-neutral-600">
                     After you answer each question, you'll get instant AI
                     feedback and an improved answer showing how you could have
                     answered better using proven interview techniques like the
                     STAR method.
                   </p>
-                  <p className="text-gray-300 font-light h-auto mt-10 bg-slate-200/30 backdrop-blur-2xl rounded-lg p-5">
+                  <p className="text-gray-300 font-light h-auto mt-10 bg-neutral-600/40 backdrop-blur-2xl rounded-lg p-5 border border-neutral-600">
                     Generating your first interview is free.
                   </p>
                 </div>
@@ -107,7 +123,7 @@ export default function Home() {
                   />
                 </div>
               </section>
-              <section className="flex gap-6">
+              <section className="flex gap-6 flex-wrap md:flex-nowrap">
                 <article className="w-auto h-auto mt-16">
                   <SpotlightCard
                     className="custom-spotlight-card flex flex-col"
@@ -165,10 +181,48 @@ export default function Home() {
                   </SpotlightCard>
                 </article>
               </section>
-              <div className="">
+              <div>
                 <h1 className="text-gray-400 py-8 text-xl">Success Stories</h1>
                 <TestimonialCard></TestimonialCard>
               </div>
+              {/* <div className=""> */}
+              <footer className="flex items-center justify-center ">
+                <div className="flex border border-neutral-600 rounded-xl backdrop-blur-2xl gap-24 my-10 bg-gradient-to-tr px-20 from-neutral-600/30 to-neutral-600/30">
+                  <section className=" flex items-center justify-center flex-col gap-4 py-4">
+                    <Image
+                      src={mainImage}
+                      alt="logo"
+                      width={300}
+                      height={300}
+                    ></Image>
+                    <p className=" text-xs text-gray-300">
+                      Prepare interview preparation with PrepAIred we are your
+                      well wishers!
+                    </p>
+                  </section>
+                  <section className="my-4 md:block hidden">
+                    <h1 className="text-gray-300">Prepaired</h1>
+                    <ul className="text-gray-400 gap-1 pt-2">
+                      <li>About us</li>
+                      <li>Community</li>
+                      <li>Tech Stack</li>
+                      <li>Terms and Conditions</li>
+                      <li>Privacy Policy</li>
+                      <li>contact us</li>
+                    </ul>
+                  </section>
+                  <section className="my-4 md:block hidden">
+                    <h1 className="text-gray-300">Community</h1>
+                    <ul className="text-gray-400 flex flex-col gap-1 pt-2">
+                      <li>Join Discord</li>
+                      <li>Follow on Twitter</li>
+                      <li>Email newsletter</li>
+                      <li>Github Discussion</li>
+                    </ul>
+                  </section>
+                </div>
+              </footer>
+              {/* </div> */}
             </div>
           </div>
         </main>

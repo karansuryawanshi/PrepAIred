@@ -46,7 +46,7 @@ const TestimonialCard = () => {
       {cardData.map((cardData, key) => (
         <article
           key={key}
-          className="rounded-xl w-96 border border-gray-700 bg-gradient-to-tr from-neutral-600/30 via-neutral-400/30 to-neutral-600/30 backdrop-blur-2xl p-4"
+          className="rounded-xl w-full md:w-96 border border-gray-700 bg-gradient-to-tr from-neutral-600/30 via-neutral-400/30 to-neutral-600/30 backdrop-blur-2xl p-4"
         >
           <div className="flex items-center gap-4">
             <Image
