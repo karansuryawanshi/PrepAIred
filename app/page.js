@@ -17,13 +17,18 @@ import { ThumbsUp } from "lucide-react";
 import TestimonialCard from "@/components/TestimonialCard";
 import { useRouter } from "next/navigation";
 import dynamic from "next/dynamic";
-import("@google/model-viewer");
+// import("@google/model-viewer");
+
+const ModelViewer = dynamic(() => import("@google/model-viewer"), {
+  ssr: false,
+});
 
 // import "@google/model-viewer";
 
 // const ModelViewer = dynamic(() => import("@google/model-viewer"), {
 //   ssr: false,
 // });
+
 const isBrowser = typeof window !== undefined;
 export default function Home() {
   // console.log(self);
@@ -124,7 +129,7 @@ export default function Home() {
                   </p>
                 </div>
                 <div className="w-auto mx-4 flex items-center justify-center ">
-                  <model-viewer
+                  <ModelViewer
                     className=" rounded-xl"
                     src="/robot_playground.glb"
                     animation-name="Wave"
