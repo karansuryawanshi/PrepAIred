@@ -1,36 +1,64 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# PrepAIred
 
-## Getting Started
+PrepAIred is an AI-powered mock interview platform designed to help users practice technical and behavioral interviews. Built with Next.js, React, and Tailwind CSS, it provides interactive features like AI-driven questions, real-time responses, and feedback.
 
-First, run the development server:
+## Features
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+- **User Authentication** – Secure sign-in/sign-up with session management.
+- **AI-Powered Interviews** – Dynamic AI-generated questions tailored to different domains.
+- **Real-Time Feedback** – AI-based evaluation and feedback on responses.
+- **Dashboard & Management** – Organize and track interviews efficiently.
+- **Speech-to-Text Support** – Record answers with voice input.
+- **Interactive UI Components** – Responsive, intuitive design with smooth animations.
+
+## Tech Stack
+
+- **Frontend:** Next.js, React.js, Tailwind CSS
+- **Backend:** Node.js, Express.js, MongoDB
+- **Authentication:** NextAuth.js, JWT
+- **AI Integration:** Gemini AI Model
+- **State Management:** Context API, Redux (if applicable)
+
+## Installation
+
+1. Clone the repository:
+   ```sh
+   git clone https://github.com/karansuryawanshi/prepaired.git
+   ```
+2. Navigate to the project directory:
+   ```sh
+   cd karansuryawanshi-prepaired
+   ```
+3. Install dependencies:
+   ```sh
+   npm install
+   ```
+4. Configure environment variables:
+   - Create a `.env.local` file and add required API keys and database credentials.
+5. Run the development server:
+   ```sh
+   npm run dev
+   ```
+
+## Folder Structure
+
+```
+karansuryawanshi-prepaired/
+├── app/                # Next.js App Router
+│   ├── auth/           # Authentication pages
+│   ├── dashboard/      # User dashboard
+│   ├── interview/      # Interview flow and feedback
+├── components/         # Reusable UI components
+├── lib/                # Utility functions
+├── public/             # Static assets
+├── src/                # Animations and UI effects
+├── utils/              # AI model, database, and schema
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## Contribution
 
-You can start editing the page by modifying `app/page.js`. The page auto-updates as you edit the file.
+Contributions are welcome! Feel free to open issues or submit pull requests.
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+## License
 
-## Learn More
-
-To learn more about Next.js, take a look at the following resources:
-
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+This project is licensed under the MIT License.
