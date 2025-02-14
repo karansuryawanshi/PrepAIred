@@ -1,4 +1,5 @@
 "use client";
+import { useEffect } from "react";
 import mainImage from "@/public/assets/mainImage.png";
 import Image from "next/image";
 import { Button } from "@/components/ui/button";
@@ -15,18 +16,28 @@ import { AudioLines } from "lucide-react";
 import { ThumbsUp } from "lucide-react";
 import TestimonialCard from "@/components/TestimonialCard";
 import { useRouter } from "next/navigation";
+import dynamic from "next/dynamic";
 
-import "@google/model-viewer";
+// import "@google/model-viewer";
+
+// const ModelViewer = dynamic(() => import("@google/model-viewer"), {
+//   ssr: false,
+// });
 
 export default function Home() {
+  console.log(self);
+  useEffect(() => {
+    import("@google/model-viewer");
+  }, []);
+
   if (typeof window !== "undefined") {
     // Code that uses window or self
     const navigate = useRouter();
 
-    const redirect = () => {
-      navigate.push("/dashboard");
-      console.log("callsed");
-    };
+    // const redirect = () => {
+    //   navigate.push("/dashboard");
+    //   console.log("callsed");
+    // };
   }
 
   return (
@@ -71,7 +82,11 @@ export default function Home() {
                 </div>
                 <div className="absolute inset-0 border-2 border-stone-700 bg-gray-300/20 rounded-lg backdrop-blur-lg"></div>
                 <div className="z-50 inset-10 py-4 cursor-pointer">
-                  <Button onClick={redirect}>Get Started</Button>
+                  <Button
+                  // onClick={redirect}
+                  >
+                    Get Started
+                  </Button>
                 </div>
               </div>
               <div className="relative bottom-0 left-0 w-full h-1/2 bg-cover bg-center opacity-20"></div>
