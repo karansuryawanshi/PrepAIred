@@ -19,12 +19,16 @@ import { useRouter } from "next/navigation";
 import "@google/model-viewer";
 
 export default function Home() {
-  const navigate = useRouter();
+  if (typeof window !== "undefined") {
+    // Code that uses window or self
+    const navigate = useRouter();
 
-  const redirect = () => {
-    navigate.push("/dashboard");
-    console.log("callsed");
-  };
+    const redirect = () => {
+      navigate.push("/dashboard");
+      console.log("callsed");
+    };
+  }
+
   return (
     <div className=" bg-blue-50">
       <div className="bg-black">
@@ -70,7 +74,7 @@ export default function Home() {
                   <Button onClick={redirect}>Get Started</Button>
                 </div>
               </div>
-              <div className="relative bottom-0 left-0 w-full h-1/2 bg-[url('/assets/faintBg.avif')] bg-cover bg-center opacity-20"></div>
+              <div className="relative bottom-0 left-0 w-full h-1/2 bg-cover bg-center opacity-20"></div>
             </div>
             {/* <div className="relative w-full h-screen bg-[url('/assets/bannerBg.avif')] bg-cover bg-center rotate-180 mt-10"></div> */}
           </div>
