@@ -67,8 +67,8 @@ const page = () => {
               Mock Interview. It has 5 questions which you can answer, and at
               the end, you will get a report based on your answers.
               <br />
-              <strong>NOTE:</strong> We never record your video. Webcam access
-              can be disabled anytime.
+              <strong>NOTE:</strong> Recording will automatically start after 10
+              seconds.
             </h2>
           </div>
         </div>

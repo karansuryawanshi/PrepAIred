@@ -1,9 +1,13 @@
 import { index } from "drizzle-orm/mysql-core";
 import { Volume2 } from "lucide-react";
-import React from "react";
+import React, { useEffect } from "react";
 import { Lightbulb } from "lucide-react";
 
 const QuestionSection = ({ mockInterviewQuestions, activeIndexQuestion }) => {
+  useEffect(() => {
+    textToSpeech();
+  }, [activeIndexQuestion]);
+
   const textToSpeech = () => {
     if ("speechSynthesis" in window) {
       const msg = new SpeechSynthesisUtterance(

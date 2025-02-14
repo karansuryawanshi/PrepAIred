@@ -44,27 +44,29 @@ const RecordAnsSection = ({
     });
   }, [results]);
 
+  // useEffect(() => {
+  //   if (!isRecording && userAnswer?.length > 10) {
+  //     UpdateUserAnswerinDB();
+  //   }
+  // });
+
   useEffect(() => {
     if (!isRecording && userAnswer?.length > 10) {
       UpdateUserAnswerinDB();
     }
-    // if (userAnswer?.length < 10) {
-    //   setLoading(false);
-    //   setUserAnswer("");
-    //   toast("Error while saving your answer");
-    //   return;
-    // }
-  });
-
+    return () => {
+      setUserAnswer("");
+    };
+  }, [isRecording]);
   useEffect(() => {
     const timer = setTimeout(() => {
       if (!isRecording) {
         startStopRecording();
         console.log("recording started");
       }
-    }, 10000); // 10 seconds delay
+    }, 10000);
 
-    return () => clearTimeout(timer); // Cleanup on unmount
+    return () => clearTimeout(timer);
   }, [activeIndexQuestion]);
 
   const startStopRecording = async () => {
@@ -78,7 +80,52 @@ const RecordAnsSection = ({
     }
   };
 
+  // const UpdateUserAnswerinDB = async () => {
+  //   setLoading(true);
+  //   const feedbackAnswer =
+  //     "question" +
+  //     mockInterviewQuestions[activeIndexQuestion].question +
+  //     ",user Answer: " +
+  //     userAnswer +
+  //     "Depend on question and user Answer for give interview question" +
+  //     "please give us rating for answer and feedback as area of improvement if any" +
+  //     "in just 3 to 5 lines to improve it in json format with rating field and feedback field. ";
+
+  //   const result = await chatSession.sendMessage(feedbackAnswer);
+  //   const mockJsonResponse = result.response
+  //     .text()
+  //     .replace("```json", " ")
+  //     .replace("```", " ");
+
+  //   console.log(mockJsonResponse);
+
+  //   const mockJsonResponseParsed = JSON.parse(mockJsonResponse);
+
+  //   const response = await db.insert(UserAnswer).values({
+  //     mockId: interviewData?.mockId,
+  //     question: mockInterviewQuestions[activeIndexQuestion].question,
+  //     correctAnswer: mockInterviewQuestions[activeIndexQuestion].answer,
+  //     userAnswer: userAnswer,
+  //     feedback: mockJsonResponseParsed?.feedback,
+  //     rating: mockJsonResponseParsed?.rating,
+  //     userEmail: user?.emailAddresses[0]?.emailAddress,
+  //     createdAt: moment().format("DD-MM-YYYY HH:mm:ss"),
+  //   });
+  //   if (response) {
+  //     toast.success("Answer saved successfully");
+  //     setResults([]);
+  //   }
+  //   // setResults([]);
+  //   setUserAnswer("");
+  //   setLoading(false);
+  // };
+
+  let isUpdating = false; // Add this flag
+
   const UpdateUserAnswerinDB = async () => {
+    if (isUpdating) return; // Prevent duplicate calls
+    isUpdating = true;
+
     setLoading(true);
     const feedbackAnswer =
       "question" +
@@ -109,13 +156,15 @@ const RecordAnsSection = ({
       userEmail: user?.emailAddresses[0]?.emailAddress,
       createdAt: moment().format("DD-MM-YYYY HH:mm:ss"),
     });
+
     if (response) {
       toast.success("Answer saved successfully");
       setResults([]);
     }
-    // setResults([]);
+
     setUserAnswer("");
     setLoading(false);
+    isUpdating = false; // Reset flag
   };
 
   return (
