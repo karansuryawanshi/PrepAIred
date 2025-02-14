@@ -17,6 +17,7 @@ import { ThumbsUp } from "lucide-react";
 import TestimonialCard from "@/components/TestimonialCard";
 import { useRouter } from "next/navigation";
 import dynamic from "next/dynamic";
+import("@google/model-viewer");
 
 // import "@google/model-viewer";
 
@@ -25,15 +26,15 @@ import dynamic from "next/dynamic";
 // });
 const isBrowser = typeof window !== undefined;
 export default function Home() {
-  console.log(self);
+  // console.log(self);
 
-  useEffect(() => {
-    if (isBrowser) {
-      import("@google/model-viewer");
-      // if this component is rendered on a browser, import preline
-      import("preline/preline");
-    }
-  }, []);
+  // useEffect(() => {
+  //   if (isBrowser) {
+  //     import("@google/model-viewer");
+  //     // if this component is rendered on a browser, import preline
+  //     import("preline/preline");
+  //   }
+  // }, []);
 
   return (
     <div className=" bg-blue-50">
