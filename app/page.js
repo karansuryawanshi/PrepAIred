@@ -23,22 +23,17 @@ import dynamic from "next/dynamic";
 // const ModelViewer = dynamic(() => import("@google/model-viewer"), {
 //   ssr: false,
 // });
-
+const isBrowser = typeof window !== undefined;
 export default function Home() {
   console.log(self);
+
   useEffect(() => {
-    import("@google/model-viewer");
+    if (isBrowser) {
+      import("@google/model-viewer");
+      // if this component is rendered on a browser, import preline
+      import("preline/preline");
+    }
   }, []);
-
-  if (typeof window !== "undefined") {
-    // Code that uses window or self
-    const navigate = useRouter();
-
-    // const redirect = () => {
-    //   navigate.push("/dashboard");
-    //   console.log("callsed");
-    // };
-  }
 
   return (
     <div className=" bg-blue-50">
