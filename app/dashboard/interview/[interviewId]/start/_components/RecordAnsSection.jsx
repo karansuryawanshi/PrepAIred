@@ -64,7 +64,7 @@ const RecordAnsSection = ({
         startStopRecording();
         console.log("recording started");
       }
-    }, 10000);
+    }, 20000);
 
     return () => clearTimeout(timer);
   }, [activeIndexQuestion]);

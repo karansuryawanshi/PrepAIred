@@ -16,7 +16,7 @@ const DashboardLayout = ({ children }) => {
   }, []);
 
   return (
-    <div>
+    <div className="bg-black w-screen h-screen">
       <Header></Header>
       <div className="mx-5 md:mx-20 lg:mx-36">{children}</div>
     </div>

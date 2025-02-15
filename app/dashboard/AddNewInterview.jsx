@@ -91,7 +91,7 @@ const AddNewInterview = () => {
   return (
     <div className="w-80">
       <div
-        className="p-10 border rounded-lg bg-secondary hover:scale-105 hover:shadow-md  transition-all duration-300 cursor-pointer"
+        className="p-10 border rounded-lg bg-neutral-300 hover:scale-105 hover:shadow-md transition-all duration-300 cursor-pointer"
         onClick={() => setOpenDialog(true)}
       >
         <h2 className="text-lg text-center">+ Add New</h2>

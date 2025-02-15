@@ -6,9 +6,9 @@ import InterviewList from "./_component/InterviewList";
 
 const Dashboard = ({ children }) => {
   return (
-    <div className="p-10">
-      <h2 className="font-bold text-2xl">Dashboard</h2>
-      <h2 className="text-gray-500">
+    <div className="p-10 ">
+      <h2 className="font-semibold text-3xl text-neutral-300">Dashboard</h2>
+      <h2 className="text-neutral-400">
         Create and start your AI mockup interview
       </h2>
       <div>

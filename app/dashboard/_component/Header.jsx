@@ -14,15 +14,15 @@ const Header = () => {
   });
 
   const handleChange = (event) => {
-    setState({ ...state, [event.target.name]: event.target.checked });
-    document.documentElement.classList.toggle("dark", event.target.checked);
-    localStorage.setItem("darkMode", event.target.checked);
+    // setState({ ...state, [event.target.name]: event.target.checked });
+    // document.documentElement.classList.toggle("dark", event.target.checked);
+    // localStorage.setItem("darkMode", event.target.checked);
   };
 
   const pathname = usePathname();
 
   return (
-    <div className="flex px-4  items-center bg-secondary shadow-md justify-between ">
+    <div className="flex px-4 bg-neutral-600/90 backdrop-blur-2xl border-neutral-500 rounded-b-xl border border-t-0 border-r-2 border-b-2 border-l-2 items-center shadow-md justify-between ">
       <span className="flex items-center">
         <Image
           src={"/assets/Logo.png"}
@@ -31,35 +31,37 @@ const Header = () => {
           alt="logo"
           className="dark:invert"
         />
-        <p className="text-2xl font-bold">
-          Prep<span className="text-red-600">AI</span>red
+        <p className="text-2xl font-bold text-neutral-300">
+          <span className="text-yellow-400">Pr</span>ep
+          <span className="text-red-600">AI</span>r
+          <span className="text-blue-400">ed</span>
         </p>
       </span>
       <ul className="hidden md:flex gap-6">
         <li
-          className={`transition-all duration-300 hover:text-black text-gray-700 hover:scale-105 cursor-pointer ${
-            pathname == "/dashboard" && "text-purple-900  scale-105"
+          className={`transition-all duration-300 hover:text-neutral-300 text-neutral-400 hover:scale-105 cursor-pointer ${
+            pathname == "/dashboard" && "text-neutral-200  scale-105"
           }`}
         >
           Dashboard
         </li>
         <li
-          className={`transition-all duration-300 hover:text-black text-gray-700  hover:scale-105 cursor-pointer ${
-            pathname == "/question" && "text-purple-700  scale-105"
+          className={`transition-all duration-300 hover:text-neutral-300 text-neutral-400  hover:scale-105 cursor-pointer ${
+            pathname == "/question" && "text-neutral-200  scale-105"
           }`}
         >
           Questions
         </li>
         <li
-          className={`transition-all duration-300 hover:text-black text-gray-700  hover:scale-105 cursor-pointer ${
-            pathname == "/upgrade" && "text-purple-700  scale-105"
+          className={`transition-all duration-300 hover:text-neutral-300 text-neutral-400  hover:scale-105 cursor-pointer ${
+            pathname == "/upgrade" && "text-neutral-200  scale-105"
           }`}
         >
           Upgrade
         </li>
         <li
-          className={`transition-all duration-300 hover:text-black text-gray-700  hover:scale-105 cursor-pointer ${
-            pathname == "/working" && "text-purple-700  scale-105"
+          className={`transition-all duration-300 hover:text-neutral-300 text-neutral-400  hover:scale-105 cursor-pointer ${
+            pathname == "/working" && "text-neutral-200  scale-105"
           }`}
         >
           How it Works?

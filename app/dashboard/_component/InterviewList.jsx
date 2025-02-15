@@ -33,8 +33,10 @@ const InterviewList = () => {
 
   return (
     <div>
-      <p className="font-medium text-xl my-4 ">Previous Mock Interview</p>
-      {!interviewList && <div>No interview Available!</div>}
+      <p className="font-medium text-xl my-4">Previous Mock Interview</p>
+      {!interviewList && (
+        <div className="text-white">No interview Available!</div>
+      )}
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5 my-3">
         {interviewList.map((interview, index) => (
           <div key={index}>

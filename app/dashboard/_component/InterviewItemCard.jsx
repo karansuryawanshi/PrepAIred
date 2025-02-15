@@ -17,22 +17,27 @@ const InterviewItemCard = ({ interview }) => {
   };
   //   console.log("interview", interview);
   return (
-    <div className="border shadow-sm rounded-lg p-3">
-      <h2 className="font-bold text-blue-800">{interview?.jobPosition}</h2>
-      <h2 className="text-sm text-gray-600">{interview.jobExperince}</h2>
-      <h2 className="text-xs text-gray-400">
+    <div className="border bg-gradient-to-tr from-neutral-500/30 via-neutral-500/60 to-neutral-500/30 shadow-sm rounded-lg  p-3">
+      {/* <div className="border bg-linear-to-l from-neutral-500 via-neutral-300 to-neutral-500 shadow-sm rounded-lg p-3"> */}
+      <h2 className="font-semibold text-neutral-100 pb-1">
+        {interview?.jobPosition}
+      </h2>
+      <h2 className="text-sm text-neutral-400 py-1">
+        {interview.jobExperince}
+      </h2>
+      <h2 className="text-sm py-1 text-neutral-300">
         created At:{interview.createdAt}{" "}
       </h2>
-      <div className="flex justify-between gap-5">
+      <div className="flex justify-between gap-5 py-2">
         <Button
-          className="w-full"
+          className="w-full text-sm"
           size="sm"
           variant="outline"
           onClick={onfeedback}
         >
           Feedback
         </Button>
-        <Button className="w-full" size="sm" onClick={onStart}>
+        <Button className="w-full text-sm" size="sm" onClick={onStart}>
           Start
         </Button>
       </div>
