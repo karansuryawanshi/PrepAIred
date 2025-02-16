@@ -47,11 +47,13 @@ const page = ({ params: paramsPromise }) => {
   return (
     <div className="p-10">
       <h1 className="text-3xl font-bold text-green-500">Congratulations!</h1>
-      <h2 className="font-bold text-2xl">Here is your interview feedback</h2>
-      <h2 className="text-blue-700 text-lg my-3">
+      <h2 className="font-bold text-2xl text-neutral-400">
+        Here is your interview feedback
+      </h2>
+      <h2 className="text-blue-100 text-lg my-3">
         Your Overall Interview Rating : <strong>{overallResult}/10</strong>
       </h2>
-      <h2 className="text-sm text-gray-500">
+      <h2 className="text-sm text-gray-400">
         Find Below Interview Question with correct Answer, your and feedback for
         improvement
       </h2>
@@ -78,6 +80,8 @@ const page = ({ params: paramsPromise }) => {
         ))}
 
       <Button
+        variant="secondary"
+        className="mt-2"
         onClick={() => {
           router.replace("/dashboard");
         }}

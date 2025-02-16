@@ -5,13 +5,17 @@ import { db } from "@/utils/db";
 import { MockInterview } from "@/utils/schema";
 import { eq, desc } from "drizzle-orm";
 import InterviewItemCard from "./InterviewItemCard";
+import Loading from "@/components/Loading";
 
 const InterviewList = () => {
   const user = useUser();
   const [interviewList, setInterviewList] = useState([]);
+  const [loading, setLoading] = useState(false);
 
   useEffect(() => {
+    setLoading(true);
     user && getInterviewList();
+    setLoading(false);
   });
 
   const getInterviewList = async () => {
@@ -31,12 +35,15 @@ const InterviewList = () => {
     setInterviewList(result);
   };
 
-  return (
+  return loading ? (
     <div>
-      <p className="font-medium text-xl my-4">Previous Mock Interview</p>
-      {!interviewList && (
-        <div className="text-white">No interview Available!</div>
-      )}
+      <Loading></Loading>
+    </div>
+  ) : (
+    <div>
+      <p className="font-medium text-xl text-neutral-400 my-4">
+        Previous Mock Interview
+      </p>
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5 my-3">
         {interviewList.map((interview, index) => (
           <div key={index}>

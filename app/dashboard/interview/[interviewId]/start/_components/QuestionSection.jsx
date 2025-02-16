@@ -5,9 +5,9 @@ import React, { useEffect } from "react";
 import { Lightbulb } from "lucide-react";
 
 const QuestionSection = ({ mockInterviewQuestions, activeIndexQuestion }) => {
-  useEffect(() => {
-    textToSpeech();
-  }, [activeIndexQuestion]);
+  // useEffect(() => {
+  //   textToSpeech();
+  // }, [activeIndexQuestion]);
 
   const textToSpeech = () => {
     if ("speechSynthesis" in window) {
@@ -36,11 +36,11 @@ const QuestionSection = ({ mockInterviewQuestions, activeIndexQuestion }) => {
             </div>
           ))}
         </div>
-        <h2 className="my-5 text-sm md:text-md">
+        <h2 className="my-5 text-md md:text-md text-neutral-400">
           {mockInterviewQuestions[activeIndexQuestion].question}
         </h2>
         <Volume2
-          className="cursor-pointer"
+          className="cursor-pointer text-neutral-300"
           onClick={() =>
             textToSpeech(mockInterviewQuestions[activeIndexQuestion].question)
           }

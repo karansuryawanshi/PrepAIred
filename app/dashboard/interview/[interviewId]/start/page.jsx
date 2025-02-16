@@ -7,14 +7,18 @@ import QuestionSection from "./_components/QuestionSection";
 import RecordAnsSection from "./_components/RecordAnsSection";
 import { Button } from "@/components/ui/button";
 import Link from "next/link";
+import Loader from "@/components/Loading";
 
 const page = ({ params }) => {
   const [interviewData, setInterviewData] = useState();
   const [mockInterviewQuestions, setMockInterviewQuestions] = useState([]);
   const [activeIndexQuestion, setActiveIndexQuestion] = useState(0);
+  const [loading, setLoading] = useState(false);
 
   useEffect(() => {
+    setLoading(true);
     getInterview();
+    setLoading(false);
   }, []);
 
   const getInterview = async () => {
@@ -32,9 +36,13 @@ const page = ({ params }) => {
     setInterviewData(result[0]);
   };
 
-  return (
-    <div className="flex">
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-10">
+  return loading ? (
+    <div className="w-screen h-screen flex items-center justify-center">
+      <Loader />
+    </div>
+  ) : (
+    <div className="flex mt-2">
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
         {mockInterviewQuestions.length > 0 && (
           <QuestionSection
             mockInterviewQuestions={mockInterviewQuestions}
@@ -46,7 +54,7 @@ const page = ({ params }) => {
           activeIndexQuestion={activeIndexQuestion}
           interviewData={interviewData}
         ></RecordAnsSection>
-        <div className="flex justify-center gap-6 my-4">
+        <div className="flex justify-center gap-6 my-2">
           {/* {activeIndexQuestion > 0 && <Button>Previous Question</Button>} */}
           {activeIndexQuestion != mockInterviewQuestions?.length - 1 && (
             <Button

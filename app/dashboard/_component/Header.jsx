@@ -22,7 +22,7 @@ const Header = () => {
   const pathname = usePathname();
 
   return (
-    <div className="flex px-4 bg-neutral-600/90 backdrop-blur-2xl border-neutral-500 rounded-b-xl border border-t-0 border-r-2 border-b-2 border-l-2 items-center shadow-md justify-between ">
+    <div className="flex px-4 bg-neutral-600/30 backdrop-blur-2xl border-neutral-900 rounded-b-xl border border-t-0 border-r-2 border-b-2 border-l-2 items-center shadow-md justify-between ">
       <span className="flex items-center">
         <Image
           src={"/assets/Logo.png"}

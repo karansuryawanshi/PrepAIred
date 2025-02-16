@@ -12,6 +12,7 @@ import { UserAnswer } from "@/utils/schema";
 import moment from "moment";
 import { useUser } from "@clerk/nextjs";
 import webcam from "../../../../../../public/assets/webcam.svg";
+// import { Mic } from "lucide-react";
 
 const RecordAnsSection = ({
   mockInterviewQuestions,
@@ -44,12 +45,6 @@ const RecordAnsSection = ({
     });
   }, [results]);
 
-  // useEffect(() => {
-  //   if (!isRecording && userAnswer?.length > 10) {
-  //     UpdateUserAnswerinDB();
-  //   }
-  // });
-
   useEffect(() => {
     if (!isRecording && userAnswer?.length > 10) {
       UpdateUserAnswerinDB();
@@ -58,16 +53,18 @@ const RecordAnsSection = ({
       setUserAnswer("");
     };
   }, [isRecording]);
+
   useEffect(() => {
     const timer = setTimeout(() => {
       if (!isRecording) {
-        startStopRecording();
+        startSpeechToText();
+        // startStopRecording();
         console.log("recording started");
       }
-    }, 20000);
+    }, 10000);
 
     return () => clearTimeout(timer);
-  }, [activeIndexQuestion]);
+  }, [activeIndexQuestion, isRecording]);
 
   const startStopRecording = async () => {
     if (isRecording) {
@@ -79,46 +76,6 @@ const RecordAnsSection = ({
       startSpeechToText();
     }
   };
-
-  // const UpdateUserAnswerinDB = async () => {
-  //   setLoading(true);
-  //   const feedbackAnswer =
-  //     "question" +
-  //     mockInterviewQuestions[activeIndexQuestion].question +
-  //     ",user Answer: " +
-  //     userAnswer +
-  //     "Depend on question and user Answer for give interview question" +
-  //     "please give us rating for answer and feedback as area of improvement if any" +
-  //     "in just 3 to 5 lines to improve it in json format with rating field and feedback field. ";
-
-  //   const result = await chatSession.sendMessage(feedbackAnswer);
-  //   const mockJsonResponse = result.response
-  //     .text()
-  //     .replace("```json", " ")
-  //     .replace("```", " ");
-
-  //   console.log(mockJsonResponse);
-
-  //   const mockJsonResponseParsed = JSON.parse(mockJsonResponse);
-
-  //   const response = await db.insert(UserAnswer).values({
-  //     mockId: interviewData?.mockId,
-  //     question: mockInterviewQuestions[activeIndexQuestion].question,
-  //     correctAnswer: mockInterviewQuestions[activeIndexQuestion].answer,
-  //     userAnswer: userAnswer,
-  //     feedback: mockJsonResponseParsed?.feedback,
-  //     rating: mockJsonResponseParsed?.rating,
-  //     userEmail: user?.emailAddresses[0]?.emailAddress,
-  //     createdAt: moment().format("DD-MM-YYYY HH:mm:ss"),
-  //   });
-  //   if (response) {
-  //     toast.success("Answer saved successfully");
-  //     setResults([]);
-  //   }
-  //   // setResults([]);
-  //   setUserAnswer("");
-  //   setLoading(false);
-  // };
 
   let isUpdating = false; // Add this flag
 
@@ -181,16 +138,16 @@ const RecordAnsSection = ({
           }}
         />
       </div>
-      <Button className="mt-10" onClick={startStopRecording}>
-        {isRecording ? (
-          <h2 className="flex items-center gap-2">
-            <Mic />
+      {isRecording ? (
+        <Button variant="outline" onClick={startStopRecording}>
+          <h2 className="flex items-center gap-2 animate-pulse">
+            <Mic className="text-red-500 " />
             Recording...
           </h2>
-        ) : (
-          "Start Recording"
-        )}
-      </Button>
+        </Button>
+      ) : (
+        <Button onClick={startStopRecording}>Start Recording</Button>
+      )}
       {/* <Button
         onClick={() => {
           console.log(userAnswer);

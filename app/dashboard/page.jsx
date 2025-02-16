@@ -1,5 +1,5 @@
 "use client";
-import React from "react";
+import React, { Suspense, useState } from "react";
 import { UserButton } from "@clerk/nextjs";
 import AddNewInterview from "./AddNewInterview";
 import InterviewList from "./_component/InterviewList";
@@ -7,7 +7,6 @@ import InterviewList from "./_component/InterviewList";
 
 const Dashboard = ({ children }) => {
   return (
-    // <SpotlightCard>
     <div className="p-10 ">
       <h2 className="font-semibold text-3xl text-neutral-300">Dashboard</h2>
       <h2 className="text-neutral-400">
