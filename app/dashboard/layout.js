@@ -4,6 +4,8 @@ import React from "react";
 import { useEffect } from "react";
 import Header from "./_component/Header";
 // import Model from "./_component/Model";
+// import SpotlightCard from "@/components/ui/spotlightCard.jsx";
+
 import dynamic from "next/dynamic";
 
 const DashboardLayout = ({ children }) => {

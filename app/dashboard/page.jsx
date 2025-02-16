@@ -3,9 +3,11 @@ import React from "react";
 import { UserButton } from "@clerk/nextjs";
 import AddNewInterview from "./AddNewInterview";
 import InterviewList from "./_component/InterviewList";
+// import SpotlightCard from "@/components/ui/spotlightCard.jsx";
 
 const Dashboard = ({ children }) => {
   return (
+    // <SpotlightCard>
     <div className="p-10 ">
       <h2 className="font-semibold text-3xl text-neutral-300">Dashboard</h2>
       <h2 className="text-neutral-400">
