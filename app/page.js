@@ -55,7 +55,7 @@ export default function Home() {
       <div className="bg-black">
         <header className="h-14 sticky top-2 z-50 flex items-center justify-center">
           <div className="text-white max-w-96 h-full pt-4 border-2 backdrop-blur-2xl bg-neutral-600/30 rounded-full">
-            <ul className="flex gap-10 px-4 text-sm xs:text-md">
+            <ul className="flex sm:gap-10 gap-5 px-4 text-sm sm:text-md">
               <li>Home</li>
               <li>Question</li>
               <li>About</li>
@@ -75,7 +75,7 @@ export default function Home() {
             ></video>
             <div className="absolute inset-0">
               <div className="flex flex-col gap-4 backdrop-blur-xl bg-gray/30 lg:p-16 rounded-lg w-auto sm:w-1/2 my-32 text-center mx-8">
-                <h1 className="lg:text-6xl text-3xl text-center font-bold text-soft-ivory ">
+                <h1 className="lg:text-6xl text-3xl text-center font-bold text-gray-400 z-20">
                   <span className="text-yellow-500 backdrop-filter-xl">PR</span>
                   EP
                   <span className="text-red-500">AI</span>R
@@ -87,26 +87,31 @@ export default function Home() {
                     delay={150}
                     animateBy="words"
                     direction="top"
-                    className="text-sm text-center lg:text-2xl mb-4 px-2"
+                    className="text-sm text-center text-gray-400 lg:text-2xl z-20 mb-4 px-2"
                   />
                 </div>
                 <div className="absolute inset-0 border-2 border-stone-700 bg-gray-300/20 rounded-lg backdrop-blur-lg"></div>
-                <div className="z-50 inset-10 py-4 cursor-pointer">
-                  <Button onClick={redirect}>Get Started</Button>
+                <div className="z-50 inset-10 py-4 cursor-pointer text-gray-400">
+                  <Button
+                    onClick={redirect}
+                    className="font-semibold text-lg text-gray-400"
+                  >
+                    Get Started
+                  </Button>
                 </div>
               </div>
               <div className="relative bottom-0 left-0 w-full h-1/2 bg-cover bg-center opacity-20"></div>
             </div>
             {/* <div className="relative w-full h-screen bg-[url('/assets/bannerBg.avif')] bg-cover bg-center rotate-180 mt-10"></div> */}
           </div>
-          <div className="bg-black text-soft-ivory text-3xl font-extralight text-center py-4">
+          <div className="bg-black text-gray-400 font-semibold text-3xl text-center py-4">
             <p>Get hired by top companies worldwide</p>
             <div className="bg-slate-200/30 backdrop-blur-2xl my-10 px-4 py-10 w-auto mx-8 md:mx-16 rounded-lg flex items-center justify-center flex-wrap gap-10">
               <Image src={coinbase} alt="coinbase" width={150} height={150} />
-              <Image src={meta} alt="coinbase" width={150} height={150} />
-              <Image src={microsoft} alt="coinbase" width={150} height={150} />
-              <Image src={spacex} alt="coinbase" width={150} height={150} />
-              <Image src={spotify} alt="coinbase" width={150} height={150} />
+              <Image src={meta} alt="meta" width={150} height={150} />
+              <Image src={microsoft} alt="microsoft" width={150} height={150} />
+              <Image src={spacex} alt="spacex" width={150} height={150} />
+              <Image src={spotify} alt="spotify" width={150} height={150} />
             </div>
           </div>
           <div className="bg-black flex items-center justify-center">
