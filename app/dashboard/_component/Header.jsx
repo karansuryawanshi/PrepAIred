@@ -68,12 +68,12 @@ const Header = () => {
         </li>
       </ul>
       <div className="flex items-center gap-4">
-        <Switch
+        {/* <Switch
           checked={state.checkedA}
           onChange={handleChange}
           name="checkedA"
           inputProps={{ "aria-label": "secondary checkbox" }}
-        />
+        /> */}
         <UserButton />
       </div>
     </div>

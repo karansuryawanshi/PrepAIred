@@ -17,7 +17,7 @@ const InterviewItemCard = ({ interview }) => {
   };
   //   console.log("interview", interview);
   return (
-    <div className="border bg-gradient-to-tr from-neutral-500/30 via-neutral-500/60 to-neutral-500/30 shadow-sm rounded-lg  p-3">
+    <div className=" bg-gradient-to-tr from-neutral-500/20 via-neutral-500/20 to-neutral-500/20 shadow-sm rounded-lg  p-3">
       {/* <div className="border bg-linear-to-l from-neutral-500 via-neutral-300 to-neutral-500 shadow-sm rounded-lg p-3"> */}
       <h2 className="font-semibold text-neutral-100 pb-1">
         {interview?.jobPosition}
@@ -37,7 +37,12 @@ const InterviewItemCard = ({ interview }) => {
         >
           Feedback
         </Button>
-        <Button className="w-full text-sm" size="sm" onClick={onStart}>
+        <Button
+          className="w-full text-sm"
+          variant="dark"
+          size="sm"
+          onClick={onStart}
+        >
           Start
         </Button>
       </div>

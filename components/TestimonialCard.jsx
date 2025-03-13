@@ -47,8 +47,10 @@ const TestimonialCard = () => {
       {cardData.map((cardData, key) => (
         <article
           key={key}
-          className="rounded-xl w-full md:w-96 border border-gray-700 bg-gradient-to-tr from-neutral-600/30 via-neutral-400/30 to-neutral-600/30 backdrop-blur-2xl p-4"
+          className="rounded-xl w-full md:w-96 border border-neutral-900 bg-gradient-to-tr from-neutral-400/20  via-neutral-500/20 to-neutral-600/20 hover:bg-gradient-to-tr 
+          backdrop-blur-2xl p-4"
         >
+          {/* hover:from-neutral-600/20  hover:via-neutral-400/20 hover:to-neutral-300/20   */}
           <div className="flex items-center gap-4">
             <Image
               src={cardData.image}
@@ -91,7 +93,7 @@ const TestimonialCard = () => {
             <li>
               <a
                 href="#"
-                className="block h-full rounded-lg border border-gray-700 p-4 hover:border-gray-600"
+                className="block h-full rounded-lg border border-neutral-700 p-4 hover:border-neutral-600"
               >
                 {/* <strong className="font-medium text-white">Project A</strong> */}
 
