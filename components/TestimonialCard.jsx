@@ -2,6 +2,8 @@
 import React from "react";
 import image1 from "@/public/image1.png";
 import Image from "next/image";
+import { motion } from "framer-motion";
+// import Spline from '@splinetool/react-spline/next';
 
 const TestimonialCard = () => {
   const cardData = [
@@ -45,8 +47,10 @@ const TestimonialCard = () => {
   return (
     <div className="flex justify-between w-auto flex-wrap gap-4">
       {cardData.map((cardData, key) => (
-        <article
+        <motion.article
           key={key}
+          whileInView={{ y: [50, 0] }}
+          transition={{ delay: `0.${key}`, transition: 2 }}
           className="rounded-xl w-full md:w-96 border border-neutral-900 bg-gradient-to-tr from-neutral-400/20  via-neutral-500/20 to-neutral-600/20 hover:bg-gradient-to-tr 
           backdrop-blur-2xl p-4"
         >
@@ -103,7 +107,7 @@ const TestimonialCard = () => {
               </a>
             </li>
           </ul>
-        </article>
+        </motion.article>
       ))}
     </div>
   );
