@@ -1,3 +1,5 @@
+"use client";
+
 import React from "react";
 import { useEffect } from "react";
 import Header from "./_component/Header";
